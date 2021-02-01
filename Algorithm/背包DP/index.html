@@ -1,0 +1,816 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.5">
+    
+    
+      
+        <title>KnapSack Programming - Zzz Algorithm</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.15aa0b43.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.75751829.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="black">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#knapsackdp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Zzz Algorithm" class="md-header-nav__button md-logo" aria-label="Zzz Algorithm">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Zzz Algorithm
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              KnapSack Programming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Zzz Algorithm" class="md-nav__button md-logo" aria-label="Zzz Algorithm">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Zzz Algorithm
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CPPIntro/" class="md-nav__link">
+        CPP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      
+      <label class="md-nav__link" for="nav-3">
+        Data Structure & Algorithm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data Structure & Algorithm" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          Data Structure & Algorithm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1" checked>
+      
+      <label class="md-nav__link" for="nav-3-1">
+        Dynmaic Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dynmaic Programming" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-1">
+          <span class="md-nav__icon md-icon"></span>
+          Dynmaic Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          KnapSack Programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        KnapSack Programming
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#knapsackdp" class="md-nav__link">
+    背包（KnapSack）DP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题描述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-1" class="md-nav__link">
+    0-1背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    完全背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    多重背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#poj" class="md-nav__link">
+    POJ 题目汇总
+  </a>
+  
+    <nav class="md-nav" aria-label="POJ 题目汇总">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-1_1" class="md-nav__link">
+    0-1 背包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    完全背包
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SegmentTree/" class="md-nav__link">
+        Segment Tree
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UnionFind/" class="md-nav__link">
+        Union Find
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      
+      <label class="md-nav__link" for="nav-4">
+        LeetCode
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LeetCode" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          LeetCode
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LeetCode/LeetCode/" class="md-nav__link">
+        Problems
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" >
+      
+      <label class="md-nav__link" for="nav-4-2">
+        WeeklyContest
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="WeeklyContest" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-2">
+          <span class="md-nav__icon md-icon"></span>
+          WeeklyContest
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LeetCode/WeeklyContest/WeeklyContest.md" class="md-nav__link">
+        225 Weekly Contest
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PY/PYIntro/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+      
+      <label class="md-nav__link" for="nav-6">
+        POJ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="POJ" data-md-level="1">
+        <label class="md-nav__title" for="nav-6">
+          <span class="md-nav__icon md-icon"></span>
+          POJ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/1384PiggyBank/" class="md-nav__link">
+        1384 Piggy Bank
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/2063Investment/" class="md-nav__link">
+        2063 Investment
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/2229Sumsets/" class="md-nav__link">
+        2229 Sumsets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/3181DollarDayz/" class="md-nav__link">
+        3181 Dollar Dayz
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/3624CharmBracelet/" class="md-nav__link">
+        3624 Charm Bracelet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#knapsackdp" class="md-nav__link">
+    背包（KnapSack）DP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    问题描述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-1" class="md-nav__link">
+    0-1背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    完全背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    多重背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#poj" class="md-nav__link">
+    POJ 题目汇总
+  </a>
+  
+    <nav class="md-nav" aria-label="POJ 题目汇总">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-1_1" class="md-nav__link">
+    0-1 背包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    完全背包
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>KnapSack Programming</h1>
+                
+                <h2 id="knapsackdp">背包（KnapSack）DP<a class="headerlink" href="#knapsackdp" title="Permanent link">#</a></h2>
+<p>这一章节记录背包dp以及各种变种类型的解法和技巧</p>
+<h2 id="_1"><strong>问题描述</strong><a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>有 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> 种物品和一个容量为 <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> 的背包，第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品的容量和价值为 <span><span class="MathJax_Preview">w_i,v_i</span><script type="math/tex">w_i,v_i</script></span>，要求选取的容量总数不大于背包容量且价值总数最大。根据选取第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品的次数以及各种约束，背包问题会被细分为 0-1 背包、完全背包等。</p>
+<h2 id="0-1"><strong>0-1背包</strong><a class="headerlink" href="#0-1" title="Permanent link">#</a></h2>
+<p>每种物品只能选取一次或者不选取。</p>
+<p><strong><span><span class="MathJax_Preview">DP</span><script type="math/tex">DP</script></span> 状态</strong>：<span><span class="MathJax_Preview">f_{i,j}</span><script type="math/tex">f_{i,j}</script></span> 表示只选取前 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品，容量为 <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> 的背包，最多能够到达的价值</p>
+<p><strong>转移方程</strong>：</p>
+<p>逻辑：如果我们当前完成了前 <span><span class="MathJax_Preview">i-1</span><script type="math/tex">i-1</script></span> 个物品的选取情况，那么开始考虑第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个。第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品有两种方式，要么选取，要么不选取。</p>
+<p>对于不选取的情况， <span><span class="MathJax_Preview">f_{i,j}=f_{i-1,j}</span><script type="math/tex">f_{i,j}=f_{i-1,j}</script></span> </p>
+<p>对于选取第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品的情况，<span><span class="MathJax_Preview">f_{i,j}=f_{i-1,j-w_i}+v_i</span><script type="math/tex">f_{i,j}=f_{i-1,j-w_i}+v_i</script></span></p>
+<p>所以，对于两种情况，我们就要取最大，于是状态转移方程为：
+<script type="math/tex; mode=display">
+f_{i,j} = \max(f_{i-1,j},f_{i-1,j-w_i}+v_i)
+</script>
+</p>
+<p><strong>边界条件</strong>：</p>
+<p>0-1背包问题，不需要特别设定边界，初始化时，将所有 <span><span class="MathJax_Preview">f_j</span><script type="math/tex">f_j</script></span> 设为 <span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span> 或者负数即可</p>
+<p><strong>空间优化</strong>：</p>
+<p>我们采取了二维数组来存储状态 <span><span class="MathJax_Preview">f_{i,j}</span><script type="math/tex">f_{i,j}</script></span>，但是实际上在更新的时候，我们的 <span><span class="MathJax_Preview">f_{i,j}</span><script type="math/tex">f_{i,j}</script></span> 只和 <span><span class="MathJax_Preview">f_{i-1,?}</span><script type="math/tex">f_{i-1,?}</script></span> 有关，也就是说，我们可以维持某个顺序更新的时候维护一个一维数组即可。
+<script type="math/tex; mode=display">
+f_j=\max(f_j,f_{j-w_i}+v_i)
+</script>
+<strong>模版代码</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">W</span><span class="p">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</code></pre></div>
+<p>注意这里，对于背包容量的循环方向是从高容量到低容量。原因是当枚举容量 <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> 的时候，比方说，我们在 <span><span class="MathJax_Preview">f_{i,2w_i}</span><script type="math/tex">f_{i,2w_i}</script></span> 的时候，更新使用了第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 个物品，那么对于 0-1 背包，应该不能使用了，但是这种情况可能会被二次选取，违背了规则。</p>
+<h2 id="_2">完全背包<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<p>每种物品能够选取无限多次。</p>
+<p>DP状态、转移方程、边界条件与 0-1 方程完全一致，唯一需要注意的是，在更新时，我们需要从低容量到高容量更新，这样每次就相当于无限次数选取第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 类物品。</p>
+<p><strong>模板代码</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">W</span><span class="o">-</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</code></pre></div>
+<h2 id="_3">多重背包<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<p>第 <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> 种物品只能最多选取 <span><span class="MathJax_Preview">k_i</span><script type="math/tex">k_i</script></span> 次</p>
+<p><strong>状态转移方程</strong>：
+<script type="math/tex; mode=display">
+f_{i,j} =\max_{k=0}^{k_i} (f_{i-1,j-k\times w_i}+v_i\times k)
+</script>
+</p>
+<h2 id="poj">POJ 题目汇总<a class="headerlink" href="#poj" title="Permanent link">#</a></h2>
+<h3 id="0-1_1">0-1 背包<a class="headerlink" href="#0-1_1" title="Permanent link">#</a></h3>
+<p>3624 Charm Bracelet，<a href="http://poj.org/problem?id=3624">http://poj.org/problem?id=3624</a>，<a href="../../POJ/3624CharmBracelet/">3624 Charm Bracelet 解法</a></p>
+<h3 id="_4">完全背包<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<p>1384 Piggy Bank，<a href="http://poj.org/problem?id=1384">http://poj.org/problem?id=1384</a>，<a href="../../POJ/1384PiggyBank/">1384 Piggy Bank</a></p>
+<p>2064 Investment，<a href="http://poj.org/problem?id=2063">http://poj.org/problem?id=2063</a>，<a href="../../POJ/2063Investment/">2063 Investment</a></p>
+<p>2229 Sumsets，<a href="http://poj.org/problem?id=2229">http://poj.org/problem?id=2229</a>，<a href="../../POJ/2229Sumsets/">2229 Sumsets 解法</a></p>
+<p>3181 Dollar Dayz，<a href="http://poj.org/problem?id=3181">http://poj.org/problem?id=3181</a>，<a href="../../POJ/3181DollarDayz/">3181 Dollar Dayz 解法</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../CPP/CPPIntro/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                CPP
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../SegmentTree/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Segment Tree
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+    
+  </body>
+</html>
