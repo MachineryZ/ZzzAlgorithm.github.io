@@ -14,7 +14,7 @@
     
     
       
-        <title>2229 Sumsets - Zzz Algorithm</title>
+        <title>2236 Wireless Work - Zzz Algorithm</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2229-sumsets" class="md-skip">
+        <a href="#2236-wireless-work" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              2229 Sumsets
+              2236 Wireless Work
             
           </span>
         </div>
@@ -461,6 +461,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../2229Sumsets/" class="md-nav__link">
+        2229 Sumsets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -471,51 +483,10 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          2229 Sumsets
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
-        2229 Sumsets
-      </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    复杂度分析
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2236WirelessWork/" class="md-nav__link">
         2236 Wireless Work
       </a>
+      
     </li>
   
 
@@ -568,21 +539,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    复杂度分析
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -594,39 +550,87 @@
               
                 
                 
-                <h1 id="2229-sumsets">2229 Sumsets<a class="headerlink" href="#2229-sumsets" title="Permanent link">#</a></h1>
-<p>这道题目可以用完全背包的思路做。但是要明确我们的 <span><span class="MathJax_Preview">dp</span><script type="math/tex">dp</script></span> 数组代表的意义</p>
-<p>在压缩数组之前，我们先用二维数组方便理解：</p>
-<p><span><span class="MathJax_Preview">f_{i,j}</span><script type="math/tex">f_{i,j}</script></span> 表示用 <span><span class="MathJax_Preview">2^0,...,2^{i-1}</span><script type="math/tex">2^0,...,2^{i-1}</script></span> 这些数字，能够组成合为 <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> 的个数。</p>
-<p>那么边界条件就要注意，和为 <span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span> 的方法就为 <span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>，所以 <span><span class="MathJax_Preview">dp[0] = 1</span><script type="math/tex">dp[0] = 1</script></span> 为边界条件</p>
-<p>那么我们的转移方程也是有所变化：
-<script type="math/tex; mode=display">
-f_{i,j} = f_{i,j} + f_{i-1,j-w_i}
-</script>
-逻辑为：在之前用前 <span><span class="MathJax_Preview">i-1</span><script type="math/tex">i-1</script></span> 种 <span><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span> 的幂能够组成容量为 <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> 的情况下，我们就可以在 <span><span class="MathJax_Preview">f_{i-1,?}</span><script type="math/tex">f_{i-1,?}</script></span> 的基础上，开始不停的增加若干 <span><span class="MathJax_Preview">2^i</span><script type="math/tex">2^i</script></span> 来增加结果个数。和完全背包的模版的本质区别就是，POJ2229是求总和，并不是最大价值，所以这里需要注意</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+                <h1 id="2236-wireless-work">2236 Wireless Work<a class="headerlink" href="#2236-wireless-work" title="Permanent link">#</a></h1>
+<p>这也是一道经典的union find模版题目。那么我们要做的就是，首先保存一下每台电脑能以距离 d 连接的备选；然后开始开始并查集的初始化、合并、查找等操作。一旦发现，被修复的某台电脑的 d 范围内有电脑也是被修复，那么就执行合并操作。</p>
+<p>查看时查看两台电脑是否是同一祖先节点即可。</p>
+<div class="highlight"><pre><span></span><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">parent</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">N</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">two</span><span class="p">;</span>
-    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">idx</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">parent</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">unionSet</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">px</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">py</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">px</span> <span class="o">==</span> <span class="n">py</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">px</span> <span class="o">&lt;</span> <span class="n">py</span><span class="p">)</span>
+        <span class="n">parent</span><span class="p">[</span><span class="n">py</span><span class="p">]</span> <span class="o">=</span> <span class="n">px</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">parent</span><span class="p">[</span><span class="n">px</span><span class="p">]</span> <span class="o">=</span> <span class="n">py</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">coor</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">mem</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">parent</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="c1">// Initialization</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">connect</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// d distance candidate</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">two</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">coor</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">coor</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> 
+                <span class="p">(</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">coor</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">coor</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">connect</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+                <span class="n">connect</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="kt">int</span><span class="p">(</span><span class="n">two</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">two</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">two</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">two</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span>  <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">%</span><span class="mi">1000000000</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">s</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Union</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
+            <span class="n">mem</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">connect</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">connect</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+                    <span class="n">unionSet</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">connect</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="sc">&#39;S&#39;</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+            <span class="c1">// Find</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;SUCCESS&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;FAIL&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="_1">复杂度分析<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p><strong>空间复杂度</strong>：用了两个数组，较大的是 <span><span class="MathJax_Preview">O(N)</span><script type="math/tex">O(N)</script></span></p>
-<p><strong>时间复杂度</strong>：我们的 <span><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span> 的幂个数为 <span><span class="MathJax_Preview">logN</span><script type="math/tex">logN</script></span>，容量循环总数为 <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>，所以总的时间复杂度为 <span><span class="MathJax_Preview">O(NlogN)</span><script type="math/tex">O(NlogN)</script></span></p>
                 
               
               
@@ -645,7 +649,7 @@ f_{i,j} = f_{i,j} + f_{i-1,j-w_i}
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../2063Investment/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../2229Sumsets/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -654,19 +658,19 @@ f_{i,j} = f_{i,j} + f_{i-1,j-w_i}
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                2063 Investment
+                2229 Sumsets
               </div>
             </div>
           </a>
         
         
-          <a href="../2236WirelessWork/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../3181DollarDayz/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                2236 Wireless Work
+                3181 Dollar Dayz
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

@@ -347,6 +347,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#poj" class="md-nav__link">
+    POJ 相关题目
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -492,6 +499,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../POJ/1611TheSuspects/" class="md-nav__link">
+        1611 The Suspects
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../POJ/1384PiggyBank/" class="md-nav__link">
         1384 Piggy Bank
       </a>
@@ -518,6 +537,18 @@
     <li class="md-nav__item">
       <a href="../../POJ/2229Sumsets/" class="md-nav__link">
         2229 Sumsets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../POJ/2236WirelessWork/" class="md-nav__link">
+        2236 Wireless Work
       </a>
     </li>
   
@@ -611,6 +642,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#poj" class="md-nav__link">
+    POJ 相关题目
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -624,7 +662,7 @@
               
                 
                 
-                <h1 id="union-find">Union Find<a class="headerlink" href="#union-find" title="Permanent link">#</a></h1>
+                <h1 id="union-find"><strong>Union Find</strong><a class="headerlink" href="#union-find" title="Permanent link">#</a></h1>
 <p>并查集是一种树状数据结构，他主要支持的操作是：</p>
 <ol>
 <li>查找（Find）：查看某个元素所属的集合</li>
@@ -655,7 +693,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>备注：路径压缩在实现时，非常重要，因为通过压缩路径之后我们当前元素到祖先节点的距离为1，也就是说，如果不进行路径压缩会形成一个深度非常深的树，这样会使得查找时间非常长。</p>
-<h2 id="_3">合并<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<h2 id="_3"><strong>合并</strong><a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
 <p>将两个集合进行合并</p>
 <p>正常版本：</p>
 <div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">union</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">parent</span><span class="p">)</span>
@@ -680,8 +718,12 @@
     <span class="k">return</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="_4">合并时时间复杂度<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<h3 id="_4"><strong>合并时时间复杂度</strong><a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
 <p>证明链接在 <a href="https://oi-wiki.org/ds/dsu-complexity/">证明链接</a></p>
+<h2 id="poj"><strong>POJ 相关题目</strong><a class="headerlink" href="#poj" title="Permanent link">#</a></h2>
+<p>1182 Food Chain，<a href="http://poj.org/problem?id=1182">http://poj.org/problem?id=1182</a></p>
+<p>1611 The Suspects，<a href="http://poj.org/problem?id=1611">http://poj.org/problem?id=1611</a>，<a href="../../POJ/1611TheSuspects/">题解</a></p>
+<p>2236 Wireless Work，<a href="http://poj.org/problem?id=2236">http://poj.org/problem?id=2236</a>，<a href="../../POJ/2236WirelessWork/">题解</a></p>
                 
               
               
